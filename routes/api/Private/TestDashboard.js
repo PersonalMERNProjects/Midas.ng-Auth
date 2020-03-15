@@ -6,13 +6,14 @@ const AuthMiddleware = require('../../../middlewares/AuthMiddleware');
 
 const User = require('../../../models/User')
 
+const passport = require('passport')
 
 
 //@route POST api/dashboard
 //@desc Get a user 
 //@access Private
 
-router.get('/', AuthMiddleware, (req, res) => {
+router.get('/', passport.authenticate('jwt', {session: false  }), (req, res) => {
     User.findById(req.user.id)
         .select('-password')
         .then((user) => res.json(user))

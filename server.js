@@ -3,22 +3,24 @@ const mongoose = require('mongoose');
 const path = require('path')
 const cors = require('cors');
 const config = require('config')
-
+const passport = require('passport')
 
 const app = express();
 
 //Body MiddleWare 
 
 app.use(express.json());
-
+app.use(passport.initialize())
 app.use(cors());
+
+require('./middlewares/PassportMiddleware')(passport);
 
 //DB config
 const DbConfig = config.get('mongoURI')
 
 
 //connect DB config
-mongoose.connect(DbConfig, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+mongoose.connect(DbConfig, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false })
     .then(() => {
         console.log('mongoDB connected')
     })

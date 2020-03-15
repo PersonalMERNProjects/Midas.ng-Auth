@@ -15,8 +15,6 @@ UserSchema = new Schema({
     username: {
         type: String,
         required: [true, "can't be blank"],
-        lowercase: true,
-        index: true,
         max: 255,
         min:3
     },
@@ -26,7 +24,6 @@ UserSchema = new Schema({
         lowercase: true,
         required: [true, "can't be blank"],
         match: [/\S+@\S+\.\S+/, 'is invalid'],
-        index: true,
         max: 255,
         min:4
     },
@@ -38,12 +35,11 @@ UserSchema = new Schema({
     },
     parent_name: {
         type: String,
-        index: true,
         default: null
     },
     parent_id: {
         type: Schema.Types.ObjectId,
-        ref: 'parent',
+        ref: 'parents',
         default: null
     },
     created_At: {
@@ -53,14 +49,22 @@ UserSchema = new Schema({
     registered_by_parent: {
         type: Boolean,
         default: false,
-        index: true
     },
     role: {
         type: String,
         enum: ["Client", "School", "Manager", "Admin", "Others"],
         default: "Client",
+    },
+    last_login_date: {
+        type: Date,
+        default: Date.now
     }
+
     
-},{ timestamps: true });
+    
+}, { timestamps: true });
+
 
 module.exports = User = mongoose.model('user', UserSchema);
+
+

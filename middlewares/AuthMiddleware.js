@@ -11,7 +11,7 @@ function AuthMiddleware(req, res, next) {
     if (!token) {
 
         return res.status(401).json({
-            message: "No token, Authorization Denied!!!",
+            message: "Access Denied!!!",
             status_code: 401
         })
     }
