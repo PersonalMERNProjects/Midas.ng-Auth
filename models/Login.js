@@ -19,7 +19,7 @@ LoginSchema = new Schema({
         index: true
     },
 
-    user_name: {
+    username: {
         type: String,
         ref: 'users',
         default: null,

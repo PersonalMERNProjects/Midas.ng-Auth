@@ -41,7 +41,8 @@ router.post('/', (req, res) => {
             .then((user) => {
                 const newLogin = new Login({
                     email: user.email,
-                    user_id: user._id
+                    user_id: user._id,
+                    username: user.username
                 })
                 newLogin.save()
         })
